@@ -28,24 +28,13 @@ if ($valid === false) {
     exit();
 }
 
-
-
-
 $city = new City;
 $city->name = $_POST['name'] ?? $city->name;
 $city->district = $_POST['district'] ?? $city->district;
 $city->population = $_POST['population'] ?? $city->population;
 
 
-$query = "UPDATE cities SET name = :name, district = :district, population = :population WHERE id = :id";
-$params = [
-    'name' => $city->name,
-    'district' => $city->district,
-    'population' => $city->population,
-    'id' => $id,
-];
-
-DB::update($query, $params);
+$city->updateNewCityToDB($id);
 
 session()->flash('success_message', 'The record was successfully edited.');
 header('Location: list.php');

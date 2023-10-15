@@ -9,7 +9,6 @@ ORDER BY `name` ASC
 LIMIT 0, 20
 ', [], 'City');
 
-// var_dump($cities->name);
 ?>
 
 <!DOCTYPE html>

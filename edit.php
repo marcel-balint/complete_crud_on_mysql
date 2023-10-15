@@ -2,13 +2,10 @@
 
 require_once './lib/bootstrap.php';
 
+$city = new City;
 $id = $_GET['id'] ?? null;
 
-$city = DB::selectOne("
- SELECT *
-FROM `cities`
-    WHERE `id` = :id
-", ['id' => $id], 'City');
+$city_edited = $city->fetchOneFromDB($id, 'City');
 
 ?>
 
@@ -27,13 +24,13 @@ FROM `cities`
     <form action="update.php?id=<?= $id ?>" method="post">
         <!-- display the form prefilled with entity data -->
         Name:<br>
-        <input type="text" name="name" value="<?= htmlspecialchars((string) old('name', $city->name)) ?>"><br>
+        <input type="text" name="name" value="<?= htmlspecialchars((string) old('name', $city_edited->name)) ?>"><br>
         <br>
         District:<br>
-        <input type="text" name="district" value="<?= htmlspecialchars((string) old('district', $city->district)) ?>"><br>
+        <input type="text" name="district" value="<?= htmlspecialchars((string) old('district', $city_edited->district)) ?>"><br>
         <br>
         Population:<br>
-        <input type="text" name="population" value="<?= htmlspecialchars((string) old('population', $city->population)) ?>"> <br>
+        <input type="text" name="population" value="<?= htmlspecialchars((string) old('population', $city_edited->population)) ?>"> <br>
         <br>
         <button type="submit">Save</button>
     </form>
